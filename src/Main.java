@@ -5,11 +5,17 @@ public class Main {
         DataHandlingTool data = new DataHandlingTool();
 
         DijkstraAlgo dijkstra = new DijkstraAlgo(data.numberOfCities(), data.getWeights(), data.getCities());
-        dijkstra.runSim();
+        int dijkstraSteps = dijkstra.runSim();
 
         data.clearVisited(data.getCities());
 
         GreedyAlgo greedy = new GreedyAlgo(data.getCities(), data.getWeights());
-        greedy.runSim();
+        int greedySteps = greedy.runSim();
+
+        System.out.println("=============================================================================\n");
+        System.out.println("Comparison: \n");
+        System.out.println("Dikjstra algorithm number of steps = " + dijkstraSteps);
+        System.out.println("\n");
+        System.out.println("Strict greedy algorithm number of steps = " + greedySteps);
     }
 }

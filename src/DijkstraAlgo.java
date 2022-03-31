@@ -14,10 +14,10 @@ public class DijkstraAlgo {
         notVisited = createNotVisitedArrayList(numberOfCities);
         visited = new ArrayList<>();
         this.cities = cities;
-        int steps = 0;
     }
 
-    public void runSim(){
+    public int runSim(){
+        int steps = 0;
         System.out.println("\n");
         int currentCityID = 0;
         City currentCity = cities.get(0);
@@ -27,9 +27,9 @@ public class DijkstraAlgo {
         while (visited.size() <= cities.size()){
             System.out.println("\n");
             System.out.println("Dijkstra Algorithm:\n");
-            System.out.println("Current city is " + currentCity.getName() + "\n");
-            String[] currentCityWeights = weights.get(currentCityID);
-            currentCity.isVisited();
+            System.out.println("Current city is " + currentCity.getName() + "\n"); steps++;
+            String[] currentCityWeights = weights.get(currentCityID); steps++;
+            currentCity.isVisited(); steps++;
             int index = 0;
             int lowestWeight = Integer.MAX_VALUE;
             int nextCityID = 0;
@@ -38,7 +38,7 @@ public class DijkstraAlgo {
                 City neighbour = cities.get(index);
 
                 if(weight.toLowerCase().contains("null") || neighbour.getVisited()){
-                    ;
+                    steps++;
                 }
                 else{
                     int distanceToNext = Integer.parseInt(weight);
@@ -47,8 +47,8 @@ public class DijkstraAlgo {
                     int existingShortestPath = neighbour.getShortestPath();
 
                     if(existingShortestPath > totalPath){
-                        neighbour.setShortestPath(totalPath);
-                        neighbour.setLastVisited(currentCityID);
+                        neighbour.setShortestPath(totalPath); steps++;
+                        neighbour.setLastVisited(currentCityID); steps++;
                         System.out.println("Unvisited neighbour " + neighbour.getName() + ": " + distanceToNext + " km (total distance is " + neighbour.getShortestPath() + " km)");
                     }
                     else{
@@ -58,21 +58,21 @@ public class DijkstraAlgo {
 
                     if(distanceToNext < lowestWeight){
                         lowestWeight = distanceToNext;
-                        nextCityID = index;
+                        nextCityID = index; steps++;
                     }
                 }
                 index++;
             }
             visited.add(currentCityID);
             notVisited.set(currentCityID, null);
-            cities.get(currentCityID).isVisited();
-            currentCityID = nextCityID;
+            currentCityID = nextCityID; steps++;
             currentCity = cities.get(currentCityID);
             System.out.println("\n");
 
             if(nextCityID == 0 && visited.size() < cities.size()){
                 System.out.println("No unvisited neighbours, going back to origin");
                 lowestWeight = 0;
+                steps++;
             }
 
             if(visited.size() <= cities.size()) {
@@ -94,10 +94,14 @@ public class DijkstraAlgo {
 
         results.add(0, cities.get(0).getName());
 
+        steps++;
+
         System.out.println("\n");
         System.out.println("Shortest path is:");
         System.out.println(results);
         System.out.println(cities.get(6).getShortestPath() + " km");
+
+        return steps;
     }
 
     public ArrayList<Integer> createNotVisitedArrayList(int numberOfCities){
