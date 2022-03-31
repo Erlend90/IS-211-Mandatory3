@@ -73,6 +73,12 @@ public class DataHandlingTool {
         return cities;
     }
 
+    public void clearVisited(ArrayList<City> cities){
+        for(City city:cities){
+            city.notVisited();
+        }
+    }
+
     public ArrayList<City> getCities() {
         return cities;
     }

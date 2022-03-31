@@ -4,8 +4,12 @@ public class Main {
     public static void main(String[] args) throws IOException {
         DataHandlingTool data = new DataHandlingTool();
 
-        Algorithm alg = new Algorithm(data.numberOfCities(), data.getWeights(), data.getCities());
+        DijkstraAlgo dijkstra = new DijkstraAlgo(data.numberOfCities(), data.getWeights(), data.getCities());
+        dijkstra.runSim();
 
-        alg.runSim();
+        data.clearVisited(data.getCities());
+
+        GreedyAlgo greedy = new GreedyAlgo(data.getCities(), data.getWeights());
+        greedy.runSim();
     }
 }

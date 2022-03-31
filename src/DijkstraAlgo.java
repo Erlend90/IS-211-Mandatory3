@@ -2,18 +2,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Algorithm {
+public class DijkstraAlgo {
     private ArrayList<Integer> visited;
     private ArrayList<Integer> notVisited;
     private List<String[]> weights;
     private ArrayList<City> cities;
     private HashMap<Integer, String> translator;
 
-    public Algorithm(int numberOfCities, List<String[]> weights, ArrayList<City> cities){
+    public DijkstraAlgo(int numberOfCities, List<String[]> weights, ArrayList<City> cities){
         this.weights = weights;
-        notVisited = populateArrayList(numberOfCities);
+        notVisited = createNotVisitedArrayList(numberOfCities);
         visited = new ArrayList<>();
         this.cities = cities;
+        int steps = 0;
     }
 
     public void runSim(){
@@ -24,12 +25,14 @@ public class Algorithm {
         currentCity.setShortestPath(0);
 
         while (visited.size() <= cities.size()){
+            System.out.println("\n");
+            System.out.println("Dijkstra Algorithm:\n");
             System.out.println("Current city is " + currentCity.getName() + "\n");
             String[] currentCityWeights = weights.get(currentCityID);
             currentCity.isVisited();
             int index = 0;
             int lowestWeight = Integer.MAX_VALUE;
-            int nextCity = 0;
+            int nextCityID = 0;
 
             for (String weight:currentCityWeights){
                 City neighbour = cities.get(index);
@@ -55,7 +58,7 @@ public class Algorithm {
 
                     if(distanceToNext < lowestWeight){
                         lowestWeight = distanceToNext;
-                        nextCity = index;
+                        nextCityID = index;
                     }
                 }
                 index++;
@@ -63,17 +66,17 @@ public class Algorithm {
             visited.add(currentCityID);
             notVisited.set(currentCityID, null);
             cities.get(currentCityID).isVisited();
-            currentCityID = nextCity;
+            currentCityID = nextCityID;
             currentCity = cities.get(currentCityID);
             System.out.println("\n");
 
-            if(nextCity == 0 && visited.size() < cities.size()){
+            if(nextCityID == 0 && visited.size() < cities.size()){
                 System.out.println("No unvisited neighbours, going back to origin");
                 lowestWeight = 0;
             }
 
             if(visited.size() <= cities.size()) {
-                System.out.println("Next city is " + cities.get(nextCity).getName() + ": " + lowestWeight + " km \n");
+                System.out.println("Next city is " + cities.get(nextCityID).getName() + ": " + lowestWeight + " km \n");
                 System.out.println("=============================================================================\n");
             }
             else {
@@ -97,7 +100,7 @@ public class Algorithm {
         System.out.println(cities.get(6).getShortestPath() + " km");
     }
 
-    public ArrayList<Integer> populateArrayList(int numberOfCities){
+    public ArrayList<Integer> createNotVisitedArrayList(int numberOfCities){
         notVisited = new ArrayList<>();
         int i = 0;
         while(i<numberOfCities){

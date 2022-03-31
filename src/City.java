@@ -51,4 +51,8 @@ public class City {
     public void isVisited() {
         visited = true;
     }
+
+    public void notVisited() {
+        visited = false;
+    }
 }
