@@ -1,0 +1,13 @@
+﻿0;111;null;null;null;null;null;null;null;null;118;null;null;
+111;0;70;null;null;null;null;null;null;null;null;null;null;
+null;70;0;75;null;null;null;null;null;null;null;null;null;
+null;null;75;0;120;null;null;null;null;null;null;null;null;
+null;null;null;120;0;138;null;null;null;146;null;null;null;
+null;null;null;null;138;0;101;null;null;97;null;null;null;
+null;null;null;null;null;101;0;211;null;null;null;null;null;
+null;null;null;null;null;null;211;0;99;null;null;null;null;
+null;null;null;null;null;null;null;99;0;80;140;null;151;
+null;null;null;null;146;97;null;null;80;0;null;null;null;
+118;null;null;null;null;null;null;null;140;null;0;75;null;
+null;null;null;null;null;null;null;null;null;null;75;0;71;
+null;null;null;null;null;null;null;null;151;null;null;71;0;
