@@ -8,9 +8,12 @@ public class GreedyAlgo {
     private ArrayList<City> cities;
     private List<String[]> weights;
     private City currentCity;
-    int totalDistance = 0;
+    int totalDistance;
+    int steps;
 
     public GreedyAlgo(ArrayList<City> cities, List<String[]> weights){
+        totalDistance = 0;
+        steps = 0;
         currentCityID = 0;
         targetCityID = 6;
         this.cities = cities;
@@ -18,8 +21,8 @@ public class GreedyAlgo {
         results = new ArrayList<>();
     }
 
-    public int runSim(){
-        int steps = 0;
+    public void runSim(){
+
 
         while(currentCityID != targetCityID){
             currentCity = cities.get(currentCityID); steps++;
@@ -37,6 +40,7 @@ public class GreedyAlgo {
                     steps++;
                 }
                 else{
+                    steps++;
                     int distanceToNext = Integer.parseInt(weight);
 
                     if(distanceToNext<lowestWeight){
@@ -54,7 +58,15 @@ public class GreedyAlgo {
         System.out.println("=============================================================================\n");
         System.out.println("Greedy algorithm: \n");
         System.out.println("Results = " + results);
-        System.out.println("Total distance = " + totalDistance + " km\n");
-    return steps;
+        System.out.println(totalDistance + " km\n");
+
+    }
+
+    public int getSteps() {
+        return steps;
+    }
+
+    public int getTotalDistance() {
+        return totalDistance;
     }
 }

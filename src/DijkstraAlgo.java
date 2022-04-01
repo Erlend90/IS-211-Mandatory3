@@ -8,25 +8,27 @@ public class DijkstraAlgo {
     private List<String[]> weights;
     private ArrayList<City> cities;
     private HashMap<Integer, String> translator;
+    private int steps;
+    private int shortestPath;
 
     public DijkstraAlgo(int numberOfCities, List<String[]> weights, ArrayList<City> cities){
         this.weights = weights;
         notVisited = createNotVisitedArrayList(numberOfCities);
         visited = new ArrayList<>();
         this.cities = cities;
+        steps = 0;
+        shortestPath = 0;
     }
 
-    public int runSim(){
-        int steps = 0;
+    public void runSim(){
         System.out.println("\n");
         int currentCityID = 0;
         City currentCity = cities.get(0);
         currentCity.setLastVisited(0);
         currentCity.setShortestPath(0);
+        System.out.println("Dijkstra Algorithm:\n");
 
         while (visited.size() <= cities.size()){
-            System.out.println("\n");
-            System.out.println("Dijkstra Algorithm:\n");
             System.out.println("Current city is " + currentCity.getName() + "\n"); steps++;
             String[] currentCityWeights = weights.get(currentCityID); steps++;
             currentCity.isVisited(); steps++;
@@ -41,6 +43,7 @@ public class DijkstraAlgo {
                     steps++;
                 }
                 else{
+                    steps++;
                     int distanceToNext = Integer.parseInt(weight);
                     int pathToCurrent = currentCity.getShortestPath();
                     int totalPath = pathToCurrent + distanceToNext;
@@ -94,14 +97,14 @@ public class DijkstraAlgo {
 
         results.add(0, cities.get(0).getName());
 
+        shortestPath = cities.get(6).getShortestPath();
+
         steps++;
 
         System.out.println("\n");
         System.out.println("Shortest path is:");
         System.out.println(results);
         System.out.println(cities.get(6).getShortestPath() + " km");
-
-        return steps;
     }
 
     public ArrayList<Integer> createNotVisitedArrayList(int numberOfCities){
@@ -113,5 +116,13 @@ public class DijkstraAlgo {
         }
         //System.out.println(notVisited.toString());
         return notVisited;
+    }
+
+    public int getShortestPath(){
+        return shortestPath;
+    }
+
+    public int getSteps(){
+        return steps;
     }
 }
