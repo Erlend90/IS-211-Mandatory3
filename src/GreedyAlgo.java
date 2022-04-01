@@ -22,17 +22,25 @@ public class GreedyAlgo {
     }
 
     public void runSim(){
-
-
+        //runs until at target city
         while(currentCityID != targetCityID){
+
+            //fetches current city object, adds the name to the result arraylist
             currentCity = cities.get(currentCityID); steps++;
             results.add(currentCity.getName()); steps++;
+
+            //fetches distances to neighbours
             String[] currentCityWeights = weights.get(currentCityID); steps++;
+
+            //sets city as visited
             currentCity.isVisited(); steps++;
+
+            //setup
             int index = 0;
             int lowestWeight = Integer.MAX_VALUE;
             int nextCityID = 0;
 
+            //examines distance to all neighbours
             for (String weight:currentCityWeights){
                 City neighbour = cities.get(index);
 
@@ -43,6 +51,7 @@ public class GreedyAlgo {
                     steps++;
                     int distanceToNext = Integer.parseInt(weight);
 
+                    //checks if this is the shortest distance to neighbours
                     if(distanceToNext<lowestWeight){
                         nextCityID = neighbour.getId();
                         lowestWeight = distanceToNext;
@@ -51,9 +60,12 @@ public class GreedyAlgo {
                 }
                 index++;
             }
+
+            //sets up next city and calculates current path
             currentCityID = nextCityID;
             totalDistance += lowestWeight;
         }
+        //presents results
         System.out.println("\n");
         System.out.println("=============================================================================\n");
         System.out.println("Greedy algorithm: \n");
