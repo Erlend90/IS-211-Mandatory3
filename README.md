@@ -41,9 +41,11 @@ WHILE CITIES STILL UNVISITED:
   - Pull all neighbouring cities from table
   - Set current city as visited
   FOR EACH UNVISITED NEIGHBOURING CITY:
-    - IF this path is shorter than existing shortest path, update shortest path
-    - IF this path is shorter than existing shortest path, update last visited city
-    - IF path to this city is shorter than previously selected shortest path, select this path as next city to visit
+    - IF not null and not already visited
+        - IF this path (global) is shorter than existing shortest path, update shortest path
+        - IF this path (global) is shorter than existing shortest path, update last visited city
+        - IF path to this city (local) is shorter than previously selected shortest path, select 
+          this path as next city to visit
   - Set city with shortest path as next city to visit
 - Track shortest path backwards from destination to origin
 
@@ -59,9 +61,178 @@ I have defined the steps of this algorithm as follows (same conditions apply as 
 
 WHILE NOT AT TARGET CITY
   - Determine current city
+  - Add current city to results
   - Pull all neighbouring cities from table
   - Set current city as visited
-  - Add current city to results
   FOR EACH UNVISITED NEIGHBOURING CITY
-    - IF this path is shorter than existing shortest path, update shortest path
+    - IF not null and not already visited
+        - IF this (local) path is shorter than existing shortest path, update shortest path
   - Go to next city
+
+
+## Results
+
+Dijkstra Algorithm:
+
+Current city is Timisoara
+
+Unvisited neighbour Lugoj: 111 km (total distance is 111 km)
+Unvisited neighbour Arad: 118 km (total distance is 118 km)
+
+
+Next city is Lugoj: 111 km 
+
+=============================================================================
+
+Current city is Lugoj
+
+Unvisited neighbour Mehadia: 70 km (total distance is 181 km)
+
+
+Next city is Mehadia: 70 km 
+
+=============================================================================
+
+Current city is Mehadia
+
+Unvisited neighbour Drobeta: 75 km (total distance is 256 km)
+
+
+Next city is Drobeta: 75 km 
+
+=============================================================================
+
+Current city is Drobeta
+
+Unvisited neighbour Craiova: 120 km (total distance is 376 km)
+
+
+Next city is Craiova: 120 km 
+
+=============================================================================
+
+Current city is Craiova
+
+Unvisited neighbour Pitesti: 138 km (total distance is 514 km)
+Unvisited neighbour Rimnicu Vilcea: 146 km (total distance is 522 km)
+
+
+Next city is Pitesti: 138 km 
+
+=============================================================================
+
+Current city is Pitesti
+
+Unvisited neighbour Bucharest: 101 km (total distance is 615 km)
+Unvisited neighbour Rimnicu Vilcea: 97 km (total distance is 611 - has an equal or a shorter path, 522 km via Craiova, not updated)
+
+
+Next city is Rimnicu Vilcea: 97 km 
+
+=============================================================================
+
+Current city is Rimnicu Vilcea
+
+Unvisited neighbour Sibiu: 80 km (total distance is 602 km)
+
+
+Next city is Sibiu: 80 km 
+
+=============================================================================
+
+Current city is Sibiu
+
+Unvisited neighbour Fagaras: 99 km (total distance is 701 km)
+Unvisited neighbour Arad: 140 km (total distance is 742 - has an equal or a shorter path, 118 km via Timisoara, not updated)
+Unvisited neighbour Oradea: 151 km (total distance is 753 km)
+
+
+Next city is Fagaras: 99 km 
+
+=============================================================================
+
+Current city is Fagaras
+
+Unvisited neighbour Bucharest: 211 km (total distance is 912 - has an equal or a shorter path, 615 km via Pitesti, not updated)
+
+
+Next city is Bucharest: 211 km 
+
+=============================================================================
+
+Current city is Bucharest
+
+
+
+No unvisited neighbours, going back to origin
+Next city is Timisoara: 0 km 
+
+=============================================================================
+
+Current city is Timisoara
+
+Unvisited neighbour Arad: 118 km (total distance is 118 - has an equal or a shorter path, 118 km via Timisoara, not updated)
+
+
+Next city is Arad: 118 km 
+
+=============================================================================
+
+Current city is Arad
+
+Unvisited neighbour Zerind: 75 km (total distance is 193 km)
+
+
+Next city is Zerind: 75 km 
+
+=============================================================================
+
+Current city is Zerind
+
+Unvisited neighbour Oradea: 71 km (total distance is 264 km)
+
+
+Next city is Oradea: 71 km 
+
+=============================================================================
+
+Current city is Oradea
+
+
+
+All cities visited
+
+
+Shortest path is:
+[Timisoara, Lugoj, Mehadia, Drobeta, Craiova, Pitesti, Bucharest]
+615 km
+
+
+=============================================================================
+
+Greedy algorithm: 
+
+Results = [Timisoara, Lugoj, Mehadia, Drobeta, Craiova, Pitesti, Rimnicu Vilcea, Sibiu, Fagaras]
+Total distance = 1001 km
+
+=============================================================================
+
+Comparison: 
+
+Dikjstra algorithm number of steps = 279, shortest path = 615
+
+Strict greedy algorithm number of steps = 163, shortest path = 1001
+
+For this sim the Dijkstra algorithm takes 71% more steps than the strict greedy algorithm 
+
+The path found by the strict greedy algorithm is 62% longer than the path found by the Dijkstra algorithm
+
+Process finished with exit code 0
+
+
+## Reflection
+
+As can be seen from the results, the strict greedy algorithm is more efficient than Dijkstras algorithm, but yields worse results. This is a good 
+illustration of the trade off one makes by running an algorithm that does not consider every option vs an algorithm which visits every node and examines 
+every connection. There are other approximation algorithms which yield better results than the strict greedy algorithm I implemented, and will be much 
+closer to the Dijkstra algorithm in precision.
