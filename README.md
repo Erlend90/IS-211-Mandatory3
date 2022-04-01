@@ -213,7 +213,7 @@ Shortest path is:
 Greedy algorithm: 
 
 Results = [Timisoara, Lugoj, Mehadia, Drobeta, Craiova, Pitesti, Rimnicu Vilcea, Sibiu, Fagaras]
-Total distance = 1001 km
+1001 km
 
 =============================================================================
 
