@@ -1,8 +1,9 @@
 # IS-211-Mandatory3
 
-For this assignment I have elected to implement and compare Dijkstras algorithm and a strictly greedy algorithm. Dijkstras algorithm is a classic algorithm 
-to solve the Travelling Salesman Problem, which will check every node and the weights for the paths to its neighbours, and will find the shortest path 
-every time. The strictly greedy algorithm, by contrast, will always choose the locally optimal path, and not care about the optimal global path at all.
+For this assignment I have elected to implement and compare Dijkstras algorithm and a strictly greedy algorithm. Dijkstras algorithm is a classic 
+algorithm to solve the Travelling Salesman Problem, which will check every node and the weights for the paths to its neighbours, and will find the 
+shortest path every time. The strictly greedy algorithm, by contrast, will always choose the locally optimal path, and not care about the optimal global 
+path at all.
 
 The reasoning for me choosing these specific algorithms, and in particular choosing the strictly greedy algorithm over a more complex approximation 
 algorithm, is two-fold:
@@ -10,8 +11,8 @@ algorithm, is two-fold:
 Firstly, despite being a very basic algorithm, I believe it still illustrates the trade-off between choosing a "lighter" algorithm which will approximate 
 an answer and give you performance over precision, and the more thourough and "heavy" algorithm which trades performance for accuracy.
 
-Second, I have been the subject of some scheduling which has been fully out of my own control (if professors or TAs want more information about this, feel 
-free to contact me directly). Hence I have not had a lot of time to study, understand and implement another more complex algorithm.
+Second, I have been the subject of some scheduling which has been largely out of my own control (if professors or TAs want more information about this, 
+feel free to contact me directly). Hence I have not had a lot of time to study, understand and implement another more complex algorithm.
 
 
 ## Assumptions
@@ -19,10 +20,10 @@ free to contact me directly). Hence I have not had a lot of time to study, under
 To solve this problem I have made certain assumptions and preparations;
 
 1)  I made the map of Romania into an Excel spreadsheet, which was then saved to a CSV file, representing the distances between the neighbouring cities.
-2)  In the CSV file I excluded all cities east of Bucharest, as logically going further easst once you get to your destination, and then going back west
+2)  In the CSV file I excluded all cities east of Bucharest, as logically going further east once you get to your destination, and then going back west
     to Bucharest, will never be shorter than the path you took to get there originally.
-3)  I have made some effort to try to make the program object oriented, and to ensure loose coupling and encapsulation, but due to the aforementioned time
-    constraints the actual algorithm classes may be a bit more messy. I have therefore added comments to explain these classes in particular.
+3)  I have made some effort to try to make the program object oriented, and to ensure loose coupling and good encapsulation, but due to the aforementioned
+    time constraints the actual algorithm classes may be a bit more messy. I have therefore added comments to explain these classes in particular.
 4)  For the benchmarking I have made the assumption that the desired output is to calculate the amount of steps taken by each algorithm rather than the
     time taken (or whatever else), as I assume that it is the time complexity/Big (O) of the algorithms we are interested in when comparing two algorithms 
     performance and results. I will define the steps for each algorithm below, and the program will count them, present the results and compare them
@@ -52,10 +53,10 @@ WHILE CITIES STILL UNVISITED:
 
 ## Strict greedy algorithm
 
-Although Dijkstras algorithm is also a greedy algorithm, the strict greedy algorithm will only ever choose the path to the nearesst unvisited city, and 
-take no notice whether or not there are unvisited cities and a shorter path might exist. Once it reaches the target destination, the algorithm will 
-terminate. The algorithm has been implemented from my own understanding of this algorithm, and is a simple enough concept that I believe no source is 
-needed.
+Although Dijkstras algorithm is also a greedy algorithm, the strict greedy algorithm will only ever choose the path to the nearest unvisited city, and 
+take no notice whether or not there are unvisited cities when the destination has been reached and a shorter path might exist. Once it reaches the target 
+destination, the algorithm will terminate. The algorithm has been implemented from my own understanding of this type of algorithm, and is a simple enough 
+concept that I believe no source is needed.
 
 I have defined the steps of this algorithm as follows (same conditions apply as for Dijkstras algorithm):
 
@@ -234,5 +235,7 @@ Process finished with exit code 0
 
 As can be seen from the results, the strict greedy algorithm is more efficient than Dijkstras algorithm, but yields worse results. This is a good 
 illustration of the trade off one makes by running an algorithm that does not consider every option vs an algorithm which visits every node and examines 
-every connection. There are other approximation algorithms which yield better results than the strict greedy algorithm I implemented, and will be much 
-closer to the Dijkstra algorithm in precision.
+every connection. I imagine there will always be a trade off between precision and performance for algorithms.
+
+Though I have not written about them in this deliverable, there are other approximation algorithms which yield better results than the strict greedy 
+algorithm I implemented, and will be much closer to the Dijkstra algorithm in precision.
